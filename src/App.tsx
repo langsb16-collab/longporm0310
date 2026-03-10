@@ -179,18 +179,23 @@ export default function App() {
   }, [messages]);
 
   const initSocket = () => {
-    socketRef.current = io();
-    socketRef.current.on('receive_message', (msg: Message) => {
-      setMessages(prev => [...prev, msg]);
-    });
+    // Socket.io not available in Cloudflare Pages
+    // Use localStorage for demo purposes
+    try {
+      const storedMessages = localStorage.getItem('tubeforge_messages');
+      if (storedMessages) {
+        setMessages(JSON.parse(storedMessages));
+      }
+    } catch (err) {
+      console.error("Failed to load messages", err);
+    }
   };
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch('/api/messages');
-      if (res.ok) {
-        const data = await res.json();
-        setMessages(data);
+      const storedMessages = localStorage.getItem('tubeforge_messages');
+      if (storedMessages) {
+        setMessages(JSON.parse(storedMessages));
       }
     } catch (err) {
       console.error("Failed to fetch messages", err);
@@ -199,15 +204,19 @@ export default function App() {
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newMessage.trim() || !socketRef.current) return;
+    if (!newMessage.trim()) return;
 
     const msg: Message = {
+      id: Date.now(),
       user_id: userId,
       text: newMessage,
-      type: 'text'
+      type: 'text',
+      created_at: new Date().toISOString()
     };
 
-    socketRef.current.emit('send_message', msg);
+    const updatedMessages = [...messages, msg];
+    setMessages(updatedMessages);
+    localStorage.setItem('tubeforge_messages', JSON.stringify(updatedMessages));
     setNewMessage('');
   };
 
@@ -238,12 +247,16 @@ export default function App() {
         reader.onloadend = () => {
           const base64data = reader.result as string;
           const msg: Message = {
+            id: Date.now(),
             user_id: userId,
             text: '[Voice Message]',
             type: 'voice',
-            voice_url: base64data
+            voice_url: base64data,
+            created_at: new Date().toISOString()
           };
-          socketRef.current?.emit('send_message', msg);
+          const updatedMessages = [...messages, msg];
+          setMessages(updatedMessages);
+          localStorage.setItem('tubeforge_messages', JSON.stringify(updatedMessages));
         };
       };
 
@@ -281,25 +294,34 @@ export default function App() {
     reader.onloadend = () => {
       const base64data = reader.result as string;
       const msg: Message = {
+        id: Date.now(),
         user_id: userId,
         text: '[Image]',
         type: 'image',
-        image_url: base64data
+        image_url: base64data,
+        created_at: new Date().toISOString()
       };
-      socketRef.current?.emit('send_message', msg);
+      const updatedMessages = [...messages, msg];
+      setMessages(updatedMessages);
+      localStorage.setItem('tubeforge_messages', JSON.stringify(updatedMessages));
     };
   };
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch('/api/projects');
-      if (res.ok) {
-        const data = await res.json();
-        setProjects(data);
+      // Load projects from localStorage
+      const storedProjects = localStorage.getItem('tubeforge_projects');
+      if (storedProjects) {
+        setProjects(JSON.parse(storedProjects));
       }
     } catch (err) {
       console.error("Failed to fetch projects", err);
     }
+  };
+
+  const saveProjects = (projectsData: Project[]) => {
+    localStorage.setItem('tubeforge_projects', JSON.stringify(projectsData));
+    setProjects(projectsData);
   };
 
   const handleCreateProject = async (e: React.FormEvent) => {
@@ -308,28 +330,46 @@ export default function App() {
     
     try {
       setGenerationStep('Initializing project...');
-      const res = await fetch('/api/projects', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, topic, duration, showSource, captionEnabled }),
-      });
-      const { id } = await res.json();
+      
+      // Create new project
+      const newProject: Project = {
+        id: Date.now(),
+        title: title || `Video about ${topic}`,
+        topic,
+        duration,
+        show_source: showSource ? 1 : 0,
+        caption_enabled: captionEnabled ? 1 : 0,
+        status: 'generating',
+        created_at: new Date().toISOString()
+      };
+      
+      const updatedProjects = [newProject, ...projects];
+      saveProjects(updatedProjects);
 
       setGenerationStep('Generating AI script...');
       const script = await generateScript(topic, duration, showSource);
-      await updateProject(id, { script, status: 'generating' });
+      newProject.script = script;
+      newProject.status = 'generating';
+      saveProjects([...updatedProjects]);
 
       setGenerationStep('Designing thumbnail...');
       const thumbPrompt = await generateThumbnailPrompt(script);
       const thumbUrl = await generateImage(thumbPrompt);
-      if (thumbUrl) await updateProject(id, { thumbnail_url: thumbUrl });
+      if (thumbUrl) {
+        newProject.thumbnail_url = thumbUrl;
+        saveProjects([...updatedProjects]);
+      }
 
       setGenerationStep('Generating AI voiceover...');
       const voiceUrl = await generateAudio(script.substring(0, 500)); // Demo limit
-      if (voiceUrl) await updateProject(id, { voice_url: voiceUrl });
+      if (voiceUrl) {
+        newProject.voice_url = voiceUrl;
+        saveProjects([...updatedProjects]);
+      }
 
       setGenerationStep('Finalizing video...');
-      await updateProject(id, { status: 'completed' });
+      newProject.status = 'completed';
+      saveProjects([...updatedProjects]);
       
       setTopic('');
       setTitle('');
@@ -337,19 +377,18 @@ export default function App() {
       fetchProjects();
     } catch (error) {
       console.error(error);
-      setGenerationStep('Generation failed.');
+      setGenerationStep('Generation failed. ' + (error as Error).message);
     } finally {
       setIsGenerating(false);
-      setGenerationStep('');
+      setTimeout(() => setGenerationStep(''), 3000);
     }
   };
 
-  const updateProject = async (id: number, data: Partial<Project>) => {
-    await fetch(`/api/projects/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
+  const updateProject = (id: number, data: Partial<Project>) => {
+    const updatedProjects = projects.map(p => 
+      p.id === id ? { ...p, ...data } : p
+    );
+    saveProjects(updatedProjects);
   };
 
   return (
