@@ -119,13 +119,21 @@ export default function App() {
     initSocket();
     fetchMessages();
     initPeer();
-    fetchTrends();
+    // Don't fetch trends on initial load to avoid API key prompt
+    // Trends will be fetched when user clicks on Trends tab
 
     return () => {
       if (socketRef.current) socketRef.current.disconnect();
       if (peerRef.current) peerRef.current.destroy();
     };
   }, []);
+
+  // Fetch trends when trends tab is opened
+  useEffect(() => {
+    if (activeTab === 'trends' && trends.length === 0 && !isFetchingTrends) {
+      fetchTrends();
+    }
+  }, [activeTab]);
 
   const initPeer = () => {
     const peer = new Peer();

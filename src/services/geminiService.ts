@@ -10,6 +10,14 @@ const getApiKey = () => {
   const storedKey = localStorage.getItem('gemini_api_key');
   if (storedKey) return storedKey;
   
+  // Return null if not found (will prompt when actually needed)
+  return null;
+};
+
+const getOrPromptApiKey = () => {
+  const key = getApiKey();
+  if (key) return key;
+  
   // Prompt user for API key
   const userKey = prompt('Please enter your Google Gemini API Key:\n\n(You can get one from https://aistudio.google.com/apikey)\n\nYour key will be saved in this browser.');
   if (userKey) {
@@ -20,9 +28,8 @@ const getApiKey = () => {
   throw new Error('Gemini API key is required. Please set VITE_GEMINI_API_KEY environment variable or enter it when prompted.');
 };
 
-const apiKey = getApiKey();
-
 export const generateScript = async (topic: string, duration: number, showSource: boolean) => {
+  const apiKey = getOrPromptApiKey();
   const ai = new GoogleGenAI({ apiKey });
   const sourceInstruction = showSource 
     ? "Include a section at the end citing news and data sources." 
@@ -48,6 +55,7 @@ export const generateScript = async (topic: string, duration: number, showSource
 };
 
 export const generateThumbnailPrompt = async (script: string) => {
+  const apiKey = getOrPromptApiKey();
   const ai = new GoogleGenAI({ apiKey });
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
@@ -59,6 +67,7 @@ export const generateThumbnailPrompt = async (script: string) => {
 };
 
 export const generateImage = async (prompt: string) => {
+  const apiKey = getOrPromptApiKey();
   const ai = new GoogleGenAI({ apiKey });
   const response = await ai.models.generateContent({
     model: 'gemini-2.5-flash-image',
@@ -81,6 +90,7 @@ export const generateImage = async (prompt: string) => {
 };
 
 export const generateAudio = async (text: string) => {
+  const apiKey = getOrPromptApiKey();
   const ai = new GoogleGenAI({ apiKey });
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash-preview-tts",
@@ -103,6 +113,7 @@ export const generateAudio = async (text: string) => {
 };
 
 export const analyzeComments = async (comments: string[]) => {
+  const apiKey = getOrPromptApiKey();
   const ai = new GoogleGenAI({ apiKey });
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
@@ -127,6 +138,7 @@ export const analyzeComments = async (comments: string[]) => {
 };
 
 export const getTrendingTopics = async () => {
+  const apiKey = getOrPromptApiKey();
   const ai = new GoogleGenAI({ apiKey });
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
@@ -156,6 +168,7 @@ export const getTrendingTopics = async () => {
 };
 
 export const translateMessage = async (text: string, targetLang: string) => {
+  const apiKey = getOrPromptApiKey();
   const ai = new GoogleGenAI({ apiKey });
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
