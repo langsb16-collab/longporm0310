@@ -1,6 +1,26 @@
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 
-const apiKey = process.env.GEMINI_API_KEY;
+// Get API key from environment or localStorage
+const getApiKey = () => {
+  // Try environment variable first (for Cloudflare Pages)
+  const envKey = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' && process.env?.GEMINI_API_KEY);
+  if (envKey) return envKey;
+  
+  // Try localStorage
+  const storedKey = localStorage.getItem('gemini_api_key');
+  if (storedKey) return storedKey;
+  
+  // Prompt user for API key
+  const userKey = prompt('Please enter your Google Gemini API Key:\n\n(You can get one from https://aistudio.google.com/apikey)\n\nYour key will be saved in this browser.');
+  if (userKey) {
+    localStorage.setItem('gemini_api_key', userKey);
+    return userKey;
+  }
+  
+  throw new Error('Gemini API key is required. Please set VITE_GEMINI_API_KEY environment variable or enter it when prompted.');
+};
+
+const apiKey = getApiKey();
 
 export const generateScript = async (topic: string, duration: number, showSource: boolean) => {
   const ai = new GoogleGenAI({ apiKey });
