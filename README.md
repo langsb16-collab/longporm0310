@@ -15,7 +15,7 @@
 - **메인 도메인**: https://callai.my
 - **서브 도메인**: https://www.callai.my
 - **Cloudflare Pages**: https://longporm0310.pages.dev
-- **최신 배포**: https://3ad4843d.longporm0310.pages.dev
+- **최신 배포**: https://d2d61615.longporm0310.pages.dev
 - **GitHub**: https://github.com/langsb16-collab/longporm0310
 
 ## 기술 스택
@@ -72,12 +72,31 @@
 - localStorage 또는 Cloudflare D1으로 대체 필요
 
 ## 환경 변수 설정
-프로젝트에서 Google Gemini API를 사용하려면 API 키가 필요합니다:
 
+### 🔑 Google Gemini API 키 설정 방법
+
+TubeForge AI는 Google Gemini API를 사용합니다. API 키를 설정하는 방법은 3가지입니다:
+
+#### 방법 1: 브라우저에서 직접 입력 (가장 간단)
+1. 웹사이트 접속: https://callai.my
+2. "영상 만들기" 탭에서 "제작 시작" 버튼 클릭
+3. API 키 입력 프롬프트가 나타나면 키 입력
+4. 키는 브라우저 localStorage에 저장되어 다음부터는 입력 불필요
+
+#### 방법 2: 로컬 개발 환경 (.env 파일)
 ```bash
 # .env 파일 생성
-GEMINI_API_KEY=your_gemini_api_key_here
-APP_URL=https://callai.my
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+#### 방법 3: Cloudflare Pages 환경 변수
+1. Cloudflare Dashboard → Pages → longporm0310
+2. Settings → Environment variables
+3. 추가: `GEMINI_API_KEY` 또는 `VITE_GEMINI_API_KEY`
+4. 값: your_gemini_api_key_here
+
+**API 키 발급:**
+- https://aistudio.google.com/apikey 에서 무료 발급 가능
 ```
 
 ## 로컬 개발
