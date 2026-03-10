@@ -1,0 +1,9 @@
+{
+  "name": "유튜브 롱폼 영상을 제작0306",
+  "description": "AI-powered YouTube long-form video generation and channel management platform.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
