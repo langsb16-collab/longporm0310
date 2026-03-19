@@ -404,7 +404,7 @@ export default function App() {
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r border-black/5 flex flex-col">
         <div className="p-6 flex items-center gap-3">
-          <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-white">
+          <div className="w-10 h-10 bg-[#1428A0] rounded-xl flex items-center justify-center text-white">
             <Video size={24} />
           </div>
           <h1 className="text-xl font-bold tracking-tight">{t.header.title}</h1>
@@ -469,7 +469,7 @@ export default function App() {
                   <button 
                     key={lang}
                     onClick={() => setLanguage(lang)}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-emerald-50 hover:text-emerald-600 transition-colors ${language === lang ? 'text-emerald-600 font-bold' : 'text-gray-600'}`}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-blue-50 hover:text-[#1428A0] transition-colors ${language === lang ? 'text-[#1428A0] font-bold' : 'text-gray-600'}`}
                   >
                     {lang.toUpperCase()}
                   </button>
@@ -478,7 +478,7 @@ export default function App() {
             </div>
             <button 
               onClick={() => setActiveTab('create')}
-              className="bg-emerald-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-600 transition-colors flex items-center gap-2"
+              className="bg-[#FF7A00] text-white px-4 py-2 rounded-lg font-bold hover:bg-[#FF8C1A] transition-all shadow-md flex items-center gap-2"
             >
               <Plus size={18} /> {t.header.create}
             </button>
@@ -495,25 +495,33 @@ export default function App() {
                 exit={{ opacity: 0, y: -10 }}
                 className="space-y-8"
               >
-                <div className="bg-emerald-600 rounded-3xl p-12 text-white relative overflow-hidden">
-                  <div className="relative z-10 max-w-lg">
-                    <h2 className="text-4xl font-bold mb-4">{t.hero.title}</h2>
-                    <p className="text-emerald-100 text-lg">{t.hero.subtitle}</p>
+                <div className="bg-gradient-to-br from-[#1428A0] to-[#2563EB] rounded-3xl p-12 text-white relative overflow-hidden shadow-xl">
+                  <div className="relative z-10 max-w-2xl">
+                    <h2 className="text-4xl font-bold mb-4">AI가 당신의 유튜브 채널을 자동으로 성장시킵니다</h2>
+                    <p className="text-blue-100 text-lg mb-8">대본 · 영상 · 쇼츠 · 업로드까지 한 번에 자동화</p>
+                    <div className="flex items-center gap-4">
+                      <button className="bg-[#FF7A00] text-white font-bold px-6 py-3.5 rounded-xl hover:bg-[#FF8C1A] transition-all shadow-lg shadow-orange-500/30 flex items-center gap-2">
+                        <Sparkles size={20} /> 영상 만들기
+                      </button>
+                      <button className="bg-white/15 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/25 transition-all border border-white/30 flex items-center gap-2">
+                        <Play size={18} /> 데모 보기
+                      </button>
+                    </div>
                   </div>
-                  <div className="absolute right-[-10%] top-[-20%] w-96 h-96 bg-emerald-500/30 rounded-full blur-3xl" />
-                  <div className="absolute right-[10%] bottom-[-30%] w-64 h-64 bg-emerald-400/20 rounded-full blur-2xl" />
+                  <div className="absolute right-[-10%] top-[-20%] w-96 h-96 bg-blue-400/20 rounded-full blur-3xl" />
+                  <div className="absolute right-[10%] bottom-[-30%] w-64 h-64 bg-blue-300/15 rounded-full blur-2xl" />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <StatCard label="Total Videos" value={projects.length.toString()} icon={<Video className="text-emerald-500" />} />
-                  <StatCard label="Avg. Views (Est.)" value="12.4K" icon={<TrendingUp className="text-blue-500" />} />
-                  <StatCard label="Active Channels" value="1" icon={<LayoutDashboard className="text-purple-500" />} />
+                  <StatCard label="Total Videos" value={projects.length.toString()} icon={<Video className="text-[#1428A0]" />} />
+                  <StatCard label="Avg. Views (Est.)" value="12.4K" icon={<TrendingUp className="text-[#10B981]" />} />
+                  <StatCard label="Active Channels" value="1" icon={<LayoutDashboard className="text-[#8B5CF6]" />} />
                 </div>
 
                 <div className="bg-white rounded-2xl border border-black/5 overflow-hidden">
                   <div className="p-6 border-b border-black/5 flex items-center justify-between">
                     <h3 className="font-bold">Recent Projects</h3>
-                    <button className="text-sm text-emerald-600 font-medium">View All</button>
+                    <button className="text-sm text-[#1428A0] font-bold hover:text-[#2563EB] transition-colors">View All</button>
                   </div>
                   <div className="divide-y divide-black/5">
                     {projects.map((project) => (
@@ -535,8 +543,8 @@ export default function App() {
                               <Clock size={12} /> {project.duration} min
                             </span>
                             <span className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full ${
-                              project.status === 'completed' ? 'bg-emerald-100 text-emerald-700' :
-                              project.status === 'generating' ? 'bg-blue-100 text-blue-700' :
+                              project.status === 'completed' ? 'bg-[#10B981]/10 text-[#10B981]' :
+                              project.status === 'generating' ? 'bg-[#1428A0]/10 text-[#1428A0]' :
                               'bg-gray-100 text-gray-700'
                             }`}>
                               {project.status}
@@ -577,7 +585,7 @@ export default function App() {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="e.g., The Future of AI in Medicine"
-                        className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#1428A0]/20 focus:border-[#1428A0] transition-all"
                       />
                     </div>
                     <div>
@@ -597,7 +605,7 @@ export default function App() {
                         <select 
                           value={duration}
                           onChange={(e) => setDuration(Number(e.target.value))}
-                          className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                          className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#1428A0]/20 focus:border-[#1428A0] transition-all"
                         >
                           {[1, 2, 3, 5, 10, 15, 20, 30, 60].map(m => (
                             <option key={m} value={m}>{m} Minutes</option>
@@ -610,18 +618,18 @@ export default function App() {
                             type="checkbox" 
                             checked={showSource}
                             onChange={() => setShowSource(!showSource)}
-                            className="w-5 h-5 rounded border-black/10 text-emerald-500 focus:ring-emerald-500"
+                            className="w-5 h-5 rounded border-black/10 text-[#1428A0] focus:ring-[#1428A0]"
                           />
-                          <span className="text-sm font-medium group-hover:text-emerald-600 transition-colors">{t.create.source}</span>
+                          <span className="text-sm font-medium group-hover:text-[#1428A0] transition-colors">{t.create.source}</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer group">
                           <input 
                             type="checkbox" 
                             checked={captionEnabled}
                             onChange={() => setCaptionEnabled(!captionEnabled)}
-                            className="w-5 h-5 rounded border-black/10 text-emerald-500 focus:ring-emerald-500"
+                            className="w-5 h-5 rounded border-black/10 text-[#1428A0] focus:ring-[#1428A0]"
                           />
-                          <span className="text-sm font-medium group-hover:text-emerald-600 transition-colors">{t.create.caption}</span>
+                          <span className="text-sm font-medium group-hover:text-[#1428A0] transition-colors">{t.create.caption}</span>
                         </label>
                       </div>
                     </div>
@@ -632,12 +640,12 @@ export default function App() {
                       className={`w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all ${
                         isGenerating 
                         ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                        : 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-lg shadow-emerald-500/20'
+                        : 'bg-[#FF7A00] text-white hover:bg-[#FF8C1A] shadow-lg shadow-orange-500/30'
                       }`}
                     >
                       {isGenerating ? (
                         <>
-                          <div className="w-5 h-5 border-2 border-gray-300 border-t-emerald-500 rounded-full animate-spin" />
+                          <div className="w-5 h-5 border-2 border-gray-300 border-t-[#FF7A00] rounded-full animate-spin" />
                           {generationStep}
                         </>
                       ) : (
@@ -665,9 +673,9 @@ export default function App() {
                     <button 
                       onClick={fetchTrends}
                       disabled={isFetchingTrends}
-                      className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-lg text-sm font-bold hover:bg-emerald-100 transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-[#1428A0] rounded-lg text-sm font-bold hover:bg-blue-100 transition-colors"
                     >
-                      {isFetchingTrends ? <div className="w-4 h-4 border-2 border-emerald-600/30 border-t-emerald-600 rounded-full animate-spin" /> : <Sparkles size={16} />}
+                      {isFetchingTrends ? <div className="w-4 h-4 border-2 border-[#1428A0]/30 border-t-[#1428A0] rounded-full animate-spin" /> : <Sparkles size={16} />}
                       Refresh Trends
                     </button>
                   </div>
@@ -711,14 +719,14 @@ export default function App() {
                     <h3 className="text-xl font-bold">{t.header.comments}</h3>
                     <div className="flex items-center gap-3">
                       {analysisResult && (
-                        <div className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-lg text-sm font-bold">
+                        <div className="px-4 py-2 bg-blue-100 text-[#1428A0] rounded-lg text-sm font-bold">
                           Sentiment: {analysisResult.sentiment}
                         </div>
                       )}
                       <button 
                         onClick={handleAnalyzeComments}
                         disabled={isAnalyzing}
-                        className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg text-sm font-bold hover:bg-emerald-600 transition-colors disabled:opacity-50"
+                        className="flex items-center gap-2 px-4 py-2 bg-[#FF7A00] text-white rounded-lg text-sm font-bold hover:bg-[#FF8C1A] transition-colors disabled:opacity-50"
                       >
                         {isAnalyzing ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Sparkles size={16} />}
                         Analyze with AI
@@ -735,12 +743,12 @@ export default function App() {
                     </div>
                     <div className="space-y-4">
                       <h4 className="text-sm font-bold uppercase tracking-wider text-gray-400">AI Recommendations</h4>
-                      <div className="p-6 bg-emerald-50 rounded-2xl border border-emerald-100 space-y-4">
-                        <div className="flex items-center gap-2 text-emerald-700 font-bold">
+                      <div className="p-6 bg-blue-50 rounded-2xl border border-blue-100 space-y-4">
+                        <div className="flex items-center gap-2 text-[#1428A0] font-bold">
                           <Sparkles size={18} /> Next Video Ideas
                         </div>
                         {analysisResult ? (
-                          <ul className="space-y-3 text-sm text-emerald-800">
+                          <ul className="space-y-3 text-sm text-[#1428A0]">
                             {analysisResult.suggestions.map((s, i) => (
                               <li key={i} className="flex items-start gap-2">
                                 <CheckCircle2 size={14} className="mt-1 flex-shrink-0" /> 
@@ -749,7 +757,7 @@ export default function App() {
                             ))}
                           </ul>
                         ) : (
-                          <p className="text-sm text-emerald-600 italic">
+                          <p className="text-sm text-[#2563EB] italic">
                             Click "Analyze with AI" to generate content recommendations based on viewer feedback.
                           </p>
                         )}
@@ -836,7 +844,7 @@ export default function App() {
                   placeholder="Remote Peer ID"
                   value={remotePeerId}
                   onChange={(e) => setRemotePeerId(e.target.value)}
-                  className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-black/10 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-black/10 focus:outline-none focus:ring-1 focus:ring-[#1428A0]"
                 />
               </div>
               <form onSubmit={handleSendMessage} className="flex items-center gap-2">
@@ -857,9 +865,9 @@ export default function App() {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder={t.chat.placeholder}
-                  className="flex-1 px-4 py-2 text-sm rounded-full bg-gray-100 border-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                  className="flex-1 px-4 py-2 text-sm rounded-full bg-gray-100 border-none focus:ring-2 focus:ring-[#1428A0]/20 transition-all"
                 />
-                <button type="submit" className="text-emerald-500 p-2 hover:bg-emerald-50 rounded-full transition-colors">
+                <button type="submit" className="text-[#1428A0] p-2 hover:bg-blue-50 rounded-full transition-colors">
                   <Send size={20} />
                 </button>
               </form>
@@ -882,7 +890,7 @@ export default function App() {
             exit={{ opacity: 0, y: 100, scale: 0.9 }}
             className="fixed bottom-24 right-8 w-[400px] h-[50vh] bg-white rounded-3xl shadow-2xl border border-black/5 flex flex-col z-[100] overflow-hidden"
           >
-            <div className="p-4 border-b border-black/5 flex items-center justify-between bg-purple-600 text-white">
+            <div className="p-4 border-b border-black/5 flex items-center justify-between bg-[#FF7A00] text-white">
               <div className="flex items-center gap-3">
                 <HelpCircle size={20} />
                 <h3 className="font-bold text-sm">AI FAQ Guide</h3>
@@ -894,7 +902,7 @@ export default function App() {
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {getFAQItems(language).map((item, idx) => (
                 <div key={idx} className="p-4 bg-gray-50 rounded-xl border border-black/5">
-                  <h4 className="font-bold text-xs text-purple-700 mb-1">Q: {item.q}</h4>
+                  <h4 className="font-bold text-xs text-[#FF7A00] mb-1">Q: {item.q}</h4>
                   <p className="text-xs text-gray-600">{item.a}</p>
                 </div>
               ))}
@@ -907,8 +915,8 @@ export default function App() {
       <div className="fixed bottom-8 left-8 flex items-center gap-4 z-[110]">
         <button 
           onClick={() => setIsChatOpen(!isChatOpen)}
-          className={`w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-all ${
-            isChatOpen ? 'bg-red-500 text-white rotate-45' : 'bg-emerald-500 text-white hover:scale-110'
+          className={`w-14 h-14 rounded-xl shadow-xl flex items-center justify-center transition-all ${
+            isChatOpen ? 'bg-red-500 text-white rotate-45' : 'bg-[#1428A0] text-white hover:scale-110'
           }`}
         >
           <MessageSquare size={24} />
@@ -923,8 +931,8 @@ export default function App() {
       <div className="fixed bottom-8 right-8 z-[110]">
         <button 
           onClick={() => setIsAIFAQOpen(!isAIFAQOpen)}
-          className={`w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-all ${
-            isAIFAQOpen ? 'bg-red-500 text-white rotate-45' : 'bg-purple-600 text-white hover:scale-110'
+          className={`w-14 h-14 rounded-xl shadow-xl flex items-center justify-center transition-all ${
+            isAIFAQOpen ? 'bg-red-500 text-white rotate-45' : 'bg-[#FF7A00] text-white hover:scale-110'
           }`}
         >
           <HelpCircle size={24} />
@@ -940,7 +948,7 @@ function NavItem({ active, onClick, icon, label }: { active: boolean, onClick: (
       onClick={onClick}
       className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
         active 
-        ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' 
+        ? 'bg-[#1428A0] text-white shadow-lg shadow-blue-500/20' 
         : 'text-gray-500 hover:bg-black/5'
       }`}
     >
@@ -952,12 +960,12 @@ function NavItem({ active, onClick, icon, label }: { active: boolean, onClick: (
 
 function StatCard({ label, value, icon }: { label: string, value: string, icon: React.ReactNode }) {
   return (
-    <div className="bg-white p-6 rounded-2xl border border-black/5 shadow-sm">
+    <div className="bg-white p-6 rounded-2xl border border-black/5 shadow-lg hover:shadow-xl transition-shadow">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-sm font-medium text-gray-500">{label}</span>
+        <span className="text-sm font-semibold text-gray-500">{label}</span>
         <div className="p-2 bg-gray-50 rounded-lg">{icon}</div>
       </div>
-      <div className="text-2xl font-bold">{value}</div>
+      <div className="text-3xl font-bold">{value}</div>
     </div>
   );
 }
@@ -970,7 +978,7 @@ function TrendItem({ rank, topic, growth, reason }: { rank: number, topic: strin
           <span className="text-2xl font-black text-gray-200 w-8">{rank}</span>
           <span className="font-bold">{topic}</span>
         </div>
-        <span className="text-emerald-500 font-bold text-sm">{growth}</span>
+        <span className="text-[#10B981] font-bold text-sm">{growth}</span>
       </div>
       {reason && <p className="text-xs text-gray-500 pl-12">{reason}</p>}
     </div>
@@ -981,7 +989,7 @@ function CommentItem({ author, text }: { author: string, text: string }) {
   return (
     <div className="p-4 bg-gray-50 rounded-xl border border-black/5">
       <div className="flex items-center gap-2 mb-1">
-        <div className="w-6 h-6 bg-emerald-200 rounded-full" />
+        <div className="w-6 h-6 bg-blue-200 rounded-full" />
         <span className="text-xs font-bold">{author}</span>
       </div>
       <p className="text-sm text-gray-600">{text}</p>
