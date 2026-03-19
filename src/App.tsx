@@ -400,14 +400,14 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F0] text-[#1A1A1A] font-sans flex">
+    <div className="min-h-screen bg-gradient-to-br from-[#0A1628] via-[#0F1E35] to-[#1A2942] text-white font-sans flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-black/5 flex flex-col">
+      <aside className="w-64 bg-gradient-to-b from-[#0F1935]/80 to-[#0A1628]/90 backdrop-blur-xl border-r border-blue-500/10 flex flex-col">
         <div className="p-6 flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#1428A0] rounded-xl flex items-center justify-center text-white">
+          <div className="w-10 h-10 bg-gradient-to-br from-[#1428A0] to-[#2563EB] rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/50">
             <Video size={24} />
           </div>
-          <h1 className="text-xl font-bold tracking-tight">{t.header.title}</h1>
+          <h1 className="text-xl font-bold tracking-tight text-white">{t.header.title}</h1>
         </div>
 
         <nav className="flex-1 px-4 py-4 space-y-1">
@@ -449,8 +449,8 @@ export default function App() {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto flex flex-col">
-        <header className="h-20 bg-white border-b border-black/5 flex items-center justify-between px-8 flex-shrink-0">
-          <h2 className="text-lg font-semibold capitalize">
+        <header className="h-20 bg-[#0F1935]/60 backdrop-blur-xl border-b border-blue-500/20 flex items-center justify-between px-8 flex-shrink-0">
+          <h2 className="text-lg font-semibold capitalize text-white">
             {activeTab === 'dashboard' && t.header.dashboard}
             {activeTab === 'create' && t.header.create}
             {activeTab === 'trends' && t.header.trends}
@@ -460,16 +460,16 @@ export default function App() {
           </h2>
           <div className="flex items-center gap-4">
             <div className="relative group">
-              <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-black/5 transition-colors text-sm font-medium">
+              <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium text-gray-300 hover:text-white">
                 <Globe size={18} />
                 {language.toUpperCase()}
               </button>
-              <div className="absolute right-0 top-full mt-1 bg-white border border-black/5 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2 w-32">
+              <div className="absolute right-0 top-full mt-1 bg-[#1A2942] border border-blue-500/20 rounded-xl shadow-2xl shadow-blue-500/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2 w-32">
                 {(Object.keys(translations) as Language[]).map((lang) => (
                   <button 
                     key={lang}
                     onClick={() => setLanguage(lang)}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-blue-50 hover:text-[#1428A0] transition-colors ${language === lang ? 'text-[#1428A0] font-bold' : 'text-gray-600'}`}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-[#2563EB]/20 hover:text-[#60A5FA] transition-colors ${language === lang ? 'text-[#60A5FA] font-bold' : 'text-gray-400'}`}
                   >
                     {lang.toUpperCase()}
                   </button>
@@ -478,7 +478,7 @@ export default function App() {
             </div>
             <button 
               onClick={() => setActiveTab('create')}
-              className="bg-[#FF7A00] text-white px-4 py-2 rounded-lg font-bold hover:bg-[#FF8C1A] transition-all shadow-md flex items-center gap-2"
+              className="bg-gradient-to-r from-[#FF7A00] to-[#FF8C1A] text-white px-4 py-2 rounded-lg font-bold hover:shadow-lg hover:shadow-orange-500/50 transition-all flex items-center gap-2"
             >
               <Plus size={18} /> {t.header.create}
             </button>
@@ -518,46 +518,46 @@ export default function App() {
                   <StatCard label="Active Channels" value="1" icon={<LayoutDashboard className="text-[#8B5CF6]" />} />
                 </div>
 
-                <div className="bg-white rounded-2xl border border-black/5 overflow-hidden">
-                  <div className="p-6 border-b border-black/5 flex items-center justify-between">
-                    <h3 className="font-bold">Recent Projects</h3>
-                    <button className="text-sm text-[#1428A0] font-bold hover:text-[#2563EB] transition-colors">View All</button>
+                <div className="bg-[#0F1935]/40 backdrop-blur-xl rounded-2xl border border-blue-500/20 overflow-hidden shadow-xl shadow-blue-500/5">
+                  <div className="p-6 border-b border-blue-500/20 flex items-center justify-between">
+                    <h3 className="font-bold text-white">Recent Projects</h3>
+                    <button className="text-sm text-[#60A5FA] font-bold hover:text-[#93C5FD] transition-colors">View All</button>
                   </div>
-                  <div className="divide-y divide-black/5">
+                  <div className="divide-y divide-blue-500/10">
                     {projects.map((project) => (
-                      <div key={project.id} className="p-6 flex items-center gap-4 hover:bg-[#F9F9F7] transition-colors">
-                        <div className="w-32 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                      <div key={project.id} className="p-6 flex items-center gap-4 hover:bg-white/5 transition-colors">
+                        <div className="w-32 h-20 bg-[#1A2942]/60 rounded-lg overflow-hidden flex-shrink-0 border border-blue-500/20">
                           {project.thumbnail_url ? (
                             <img src={project.thumbnail_url} alt={project.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center text-gray-400">
+                            <div className="w-full h-full flex items-center justify-center text-gray-500">
                               <ImageIcon size={24} />
                             </div>
                           )}
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-bold text-lg">{project.title}</h4>
-                          <p className="text-sm text-gray-500 line-clamp-1">{project.topic}</p>
+                          <h4 className="font-bold text-lg text-white">{project.title}</h4>
+                          <p className="text-sm text-gray-400 line-clamp-1">{project.topic}</p>
                           <div className="flex items-center gap-3 mt-2">
-                            <span className="flex items-center gap-1 text-xs text-gray-400">
+                            <span className="flex items-center gap-1 text-xs text-gray-500">
                               <Clock size={12} /> {project.duration} min
                             </span>
                             <span className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full ${
-                              project.status === 'completed' ? 'bg-[#10B981]/10 text-[#10B981]' :
-                              project.status === 'generating' ? 'bg-[#1428A0]/10 text-[#1428A0]' :
-                              'bg-gray-100 text-gray-700'
+                              project.status === 'completed' ? 'bg-[#10B981]/20 text-[#10B981] border border-[#10B981]/30' :
+                              project.status === 'generating' ? 'bg-[#60A5FA]/20 text-[#60A5FA] border border-[#60A5FA]/30' :
+                              'bg-gray-700/50 text-gray-400 border border-gray-600/30'
                             }`}>
                               {project.status}
                             </span>
                           </div>
                         </div>
-                        <button className="p-2 hover:bg-black/5 rounded-full transition-colors">
+                        <button className="p-2 hover:bg-white/10 rounded-full transition-colors text-gray-400 hover:text-white">
                           <ChevronRight size={20} />
                         </button>
                       </div>
                     ))}
                     {projects.length === 0 && (
-                      <div className="p-12 text-center text-gray-400">
+                      <div className="p-12 text-center text-gray-500">
                         No projects yet. Start by creating your first video!
                       </div>
                     )}
@@ -574,38 +574,38 @@ export default function App() {
                 exit={{ opacity: 0, y: -10 }}
                 className="max-w-2xl mx-auto"
               >
-                <div className="bg-white rounded-3xl p-8 border border-black/5 shadow-sm">
-                  <h3 className="text-2xl font-bold mb-6">{t.create.title}</h3>
+                <div className="bg-[#0F1935]/40 backdrop-blur-xl rounded-3xl p-8 border border-blue-500/20 shadow-xl shadow-blue-500/5">
+                  <h3 className="text-2xl font-bold mb-6 text-white">{t.create.title}</h3>
                   <form onSubmit={handleCreateProject} className="space-y-6">
                     <div>
-                      <label className="block text-sm font-semibold mb-2">{t.create.pTitle}</label>
+                      <label className="block text-sm font-semibold mb-2 text-gray-300">{t.create.pTitle}</label>
                       <input 
                         type="text" 
                         required
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="e.g., The Future of AI in Medicine"
-                        className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#1428A0]/20 focus:border-[#1428A0] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-[#1A2942]/60 border border-blue-500/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#60A5FA]/50 focus:border-[#60A5FA] transition-all"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold mb-2">{t.create.topic}</label>
+                      <label className="block text-sm font-semibold mb-2 text-gray-300">{t.create.topic}</label>
                       <textarea 
                         required
                         value={topic}
                         onChange={(e) => setTopic(e.target.value)}
                         placeholder="What is this video about? Provide context or keywords..."
-                        className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all h-32"
+                        className="w-full px-4 py-3 rounded-xl bg-[#1A2942]/60 border border-blue-500/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#60A5FA]/50 focus:border-[#60A5FA] transition-all h-32"
                       />
                     </div>
                     
                     <div className="grid grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-semibold mb-2">{t.create.duration}</label>
+                        <label className="block text-sm font-semibold mb-2 text-gray-300">{t.create.duration}</label>
                         <select 
                           value={duration}
                           onChange={(e) => setDuration(Number(e.target.value))}
-                          className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#1428A0]/20 focus:border-[#1428A0] transition-all"
+                          className="w-full px-4 py-3 rounded-xl bg-[#1A2942]/60 border border-blue-500/20 text-white focus:outline-none focus:ring-2 focus:ring-[#60A5FA]/50 focus:border-[#60A5FA] transition-all"
                         >
                           {[1, 2, 3, 5, 10, 15, 20, 30, 60].map(m => (
                             <option key={m} value={m}>{m} Minutes</option>
@@ -618,18 +618,18 @@ export default function App() {
                             type="checkbox" 
                             checked={showSource}
                             onChange={() => setShowSource(!showSource)}
-                            className="w-5 h-5 rounded border-black/10 text-[#1428A0] focus:ring-[#1428A0]"
+                            className="w-5 h-5 rounded border-blue-500/30 bg-[#1A2942]/60 text-[#60A5FA] focus:ring-[#60A5FA]"
                           />
-                          <span className="text-sm font-medium group-hover:text-[#1428A0] transition-colors">{t.create.source}</span>
+                          <span className="text-sm font-medium text-gray-300 group-hover:text-[#60A5FA] transition-colors">{t.create.source}</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer group">
                           <input 
                             type="checkbox" 
                             checked={captionEnabled}
                             onChange={() => setCaptionEnabled(!captionEnabled)}
-                            className="w-5 h-5 rounded border-black/10 text-[#1428A0] focus:ring-[#1428A0]"
+                            className="w-5 h-5 rounded border-blue-500/30 bg-[#1A2942]/60 text-[#60A5FA] focus:ring-[#60A5FA]"
                           />
-                          <span className="text-sm font-medium group-hover:text-[#1428A0] transition-colors">{t.create.caption}</span>
+                          <span className="text-sm font-medium text-gray-300 group-hover:text-[#60A5FA] transition-colors">{t.create.caption}</span>
                         </label>
                       </div>
                     </div>
@@ -639,8 +639,8 @@ export default function App() {
                       disabled={isGenerating}
                       className={`w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all ${
                         isGenerating 
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                        : 'bg-[#FF7A00] text-white hover:bg-[#FF8C1A] shadow-lg shadow-orange-500/30'
+                        ? 'bg-gray-800 text-gray-500 cursor-not-allowed' 
+                        : 'bg-gradient-to-r from-[#FF7A00] to-[#FF8C1A] text-white hover:shadow-xl hover:shadow-orange-500/50'
                       }`}
                     >
                       {isGenerating ? (
@@ -667,15 +667,15 @@ export default function App() {
                 exit={{ opacity: 0, y: -10 }}
                 className="space-y-8"
               >
-                <div className="bg-white rounded-3xl p-8 border border-black/5">
+                <div className="bg-[#0F1935]/40 backdrop-blur-xl rounded-3xl p-8 border border-blue-500/20 shadow-xl shadow-blue-500/5">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold">Global YouTube Trends</h3>
+                    <h3 className="text-xl font-bold text-white">Global YouTube Trends</h3>
                     <button 
                       onClick={fetchTrends}
                       disabled={isFetchingTrends}
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-[#1428A0] rounded-lg text-sm font-bold hover:bg-blue-100 transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 bg-[#60A5FA]/20 text-[#60A5FA] border border-[#60A5FA]/30 rounded-lg text-sm font-bold hover:bg-[#60A5FA]/30 transition-colors"
                     >
-                      {isFetchingTrends ? <div className="w-4 h-4 border-2 border-[#1428A0]/30 border-t-[#1428A0] rounded-full animate-spin" /> : <Sparkles size={16} />}
+                      {isFetchingTrends ? <div className="w-4 h-4 border-2 border-[#60A5FA]/30 border-t-[#60A5FA] rounded-full animate-spin" /> : <Sparkles size={16} />}
                       Refresh Trends
                     </button>
                   </div>
@@ -714,19 +714,19 @@ export default function App() {
                 exit={{ opacity: 0, y: -10 }}
                 className="space-y-8"
               >
-                <div className="bg-white rounded-3xl p-8 border border-black/5">
+                <div className="bg-[#0F1935]/40 backdrop-blur-xl rounded-3xl p-8 border border-blue-500/20 shadow-xl shadow-blue-500/5">
                   <div className="flex items-center justify-between mb-8">
-                    <h3 className="text-xl font-bold">{t.header.comments}</h3>
+                    <h3 className="text-xl font-bold text-white">{t.header.comments}</h3>
                     <div className="flex items-center gap-3">
                       {analysisResult && (
-                        <div className="px-4 py-2 bg-blue-100 text-[#1428A0] rounded-lg text-sm font-bold">
+                        <div className="px-4 py-2 bg-[#60A5FA]/20 text-[#60A5FA] border border-[#60A5FA]/30 rounded-lg text-sm font-bold">
                           Sentiment: {analysisResult.sentiment}
                         </div>
                       )}
                       <button 
                         onClick={handleAnalyzeComments}
                         disabled={isAnalyzing}
-                        className="flex items-center gap-2 px-4 py-2 bg-[#FF7A00] text-white rounded-lg text-sm font-bold hover:bg-[#FF8C1A] transition-colors disabled:opacity-50"
+                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#FF7A00] to-[#FF8C1A] text-white rounded-lg text-sm font-bold hover:shadow-lg hover:shadow-orange-500/50 transition-all disabled:opacity-50"
                       >
                         {isAnalyzing ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Sparkles size={16} />}
                         Analyze with AI
@@ -736,28 +736,28 @@ export default function App() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-4">
-                      <h4 className="text-sm font-bold uppercase tracking-wider text-gray-400">Recent Comments</h4>
+                      <h4 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-4">Recent Comments</h4>
                       <CommentItem author="TechEnthusiast" text="Could you explain more about the hardware requirements for this?" />
                       <CommentItem author="FutureSeeker" text="Amazing content! Please do a video on AI ethics next." />
                       <CommentItem author="DevLife" text="The visuals are stunning. What AI did you use for the images?" />
                     </div>
                     <div className="space-y-4">
-                      <h4 className="text-sm font-bold uppercase tracking-wider text-gray-400">AI Recommendations</h4>
-                      <div className="p-6 bg-blue-50 rounded-2xl border border-blue-100 space-y-4">
-                        <div className="flex items-center gap-2 text-[#1428A0] font-bold">
+                      <h4 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-4">AI Recommendations</h4>
+                      <div className="p-6 bg-[#60A5FA]/10 backdrop-blur-sm rounded-2xl border border-[#60A5FA]/30 space-y-4">
+                        <div className="flex items-center gap-2 text-[#60A5FA] font-bold">
                           <Sparkles size={18} /> Next Video Ideas
                         </div>
                         {analysisResult ? (
-                          <ul className="space-y-3 text-sm text-[#1428A0]">
+                          <ul className="space-y-3 text-sm text-gray-300">
                             {analysisResult.suggestions.map((s, i) => (
                               <li key={i} className="flex items-start gap-2">
-                                <CheckCircle2 size={14} className="mt-1 flex-shrink-0" /> 
+                                <CheckCircle2 size={14} className="mt-1 flex-shrink-0 text-[#10B981]" /> 
                                 <span>{s}</span>
                               </li>
                             ))}
                           </ul>
                         ) : (
-                          <p className="text-sm text-[#2563EB] italic">
+                          <p className="text-sm text-gray-400 italic">
                             Click "Analyze with AI" to generate content recommendations based on viewer feedback.
                           </p>
                         )}
@@ -778,11 +778,11 @@ export default function App() {
             initial={{ opacity: 0, y: 100, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.9 }}
-            className="fixed bottom-24 left-8 w-[400px] h-[50vh] bg-white rounded-3xl shadow-2xl border border-black/5 flex flex-col z-[100] overflow-hidden"
+            className="fixed bottom-24 left-8 w-[400px] h-[50vh] bg-[#0F1935]/95 backdrop-blur-2xl rounded-3xl shadow-2xl shadow-blue-500/20 border border-blue-500/30 flex flex-col z-[100] overflow-hidden"
           >
-            <div className="p-4 border-b border-black/5 flex items-center justify-between bg-emerald-500 text-white">
+            <div className="p-4 border-b border-blue-500/30 flex items-center justify-between bg-gradient-to-r from-[#1428A0] to-[#2563EB] text-white">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
                   <MessageSquare size={16} />
                 </div>
                 <div>
@@ -948,8 +948,8 @@ function NavItem({ active, onClick, icon, label }: { active: boolean, onClick: (
       onClick={onClick}
       className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
         active 
-        ? 'bg-[#1428A0] text-white shadow-lg shadow-blue-500/20' 
-        : 'text-gray-500 hover:bg-black/5'
+        ? 'bg-gradient-to-r from-[#1428A0] to-[#2563EB] text-white shadow-lg shadow-blue-500/30' 
+        : 'text-gray-400 hover:bg-white/5 hover:text-white'
       }`}
     >
       {icon}
@@ -960,39 +960,39 @@ function NavItem({ active, onClick, icon, label }: { active: boolean, onClick: (
 
 function StatCard({ label, value, icon }: { label: string, value: string, icon: React.ReactNode }) {
   return (
-    <div className="bg-white p-6 rounded-2xl border border-black/5 shadow-lg hover:shadow-xl transition-shadow">
+    <div className="bg-[#0F1935]/40 backdrop-blur-xl p-6 rounded-2xl border border-blue-500/20 shadow-xl shadow-blue-500/10 hover:shadow-blue-500/20 transition-shadow">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-sm font-semibold text-gray-500">{label}</span>
-        <div className="p-2 bg-gray-50 rounded-lg">{icon}</div>
+        <span className="text-sm font-semibold text-gray-400">{label}</span>
+        <div className="p-2 bg-[#1A2942]/60 rounded-lg">{icon}</div>
       </div>
-      <div className="text-3xl font-bold">{value}</div>
+      <div className="text-3xl font-bold text-white">{value}</div>
     </div>
   );
 }
 
 function TrendItem({ rank, topic, growth, reason }: { rank: number, topic: string, growth: string, reason?: string }) {
   return (
-    <div className="p-4 hover:bg-gray-50 rounded-xl transition-colors cursor-pointer border border-transparent hover:border-black/5">
+    <div className="p-4 hover:bg-white/5 rounded-xl transition-colors cursor-pointer border border-transparent hover:border-blue-500/30">
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-4">
-          <span className="text-2xl font-black text-gray-200 w-8">{rank}</span>
-          <span className="font-bold">{topic}</span>
+          <span className="text-2xl font-black text-gray-700 w-8">{rank}</span>
+          <span className="font-bold text-white">{topic}</span>
         </div>
         <span className="text-[#10B981] font-bold text-sm">{growth}</span>
       </div>
-      {reason && <p className="text-xs text-gray-500 pl-12">{reason}</p>}
+      {reason && <p className="text-xs text-gray-400 pl-12">{reason}</p>}
     </div>
   );
 }
 
 function CommentItem({ author, text }: { author: string, text: string }) {
   return (
-    <div className="p-4 bg-gray-50 rounded-xl border border-black/5">
+    <div className="p-4 bg-[#1A2942]/40 rounded-xl border border-blue-500/20">
       <div className="flex items-center gap-2 mb-1">
-        <div className="w-6 h-6 bg-blue-200 rounded-full" />
-        <span className="text-xs font-bold">{author}</span>
+        <div className="w-6 h-6 bg-gradient-to-br from-[#60A5FA] to-[#3B82F6] rounded-full" />
+        <span className="text-xs font-bold text-gray-300">{author}</span>
       </div>
-      <p className="text-sm text-gray-600">{text}</p>
+      <p className="text-sm text-gray-400">{text}</p>
     </div>
   );
 }
