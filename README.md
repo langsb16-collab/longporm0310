@@ -15,16 +15,18 @@
 - **메인 도메인**: https://callai.my
 - **서브 도메인**: https://www.callai.my
 - **Cloudflare Pages**: https://longporm0310.pages.dev
-- **최신 배포**: https://d2d61615.longporm0310.pages.dev
+- **최신 배포**: https://1cdae038.longporm0310.pages.dev
 - **GitHub**: https://github.com/langsb16-collab/longporm0310
 
 ## 기술 스택
 - **Frontend**: React 19 + TypeScript
 - **스타일링**: TailwindCSS 4.1 + Motion (Framer Motion)
+- **디자인**: Dark Mode Samsung Blue Theme + Glassmorphism
 - **AI 서비스**: Google Gemini API (gemini-3.1-pro, gemini-2.5-flash)
 - **아이콘**: Lucide React
 - **빌드 도구**: Vite 6.2
 - **배포**: Cloudflare Pages
+- **아키텍처**: Desktop/Mobile 완전 분리형 UI (준비 중)
 
 ## 주요 기능
 
@@ -134,7 +136,28 @@ npx wrangler pages deploy dist --project-name longporm0310
 ### 배포 상태
 - ✅ **활성**: 배포 완료 및 정상 작동
 - **플랫폼**: Cloudflare Pages
-- **마지막 업데이트**: 2026-03-10
+- **디자인**: Dark Mode Samsung Blue Theme
+- **마지막 업데이트**: 2026-03-19
+
+## UI/UX 특징
+
+### 다크 모드 Samsung Blue 테마
+- **배경**: 우주 느낌의 다크 그라데이션 (#0A1628 → #1A2942)
+- **카드**: 글래스모피즘 (반투명 + backdrop-blur)
+- **강조색**: Samsung Blue (#1428A0, #2563EB) + Orange (#FF7A00)
+- **효과**: 네온 글로우 및 블루 그림자
+
+### Desktop/Mobile 분리형 아키텍처 (진행 중)
+**Desktop UI (SaaS 중심)**
+- 3단 레이아웃: Sidebar + Main + Chat Panel
+- 우측 채팅 패널 항상 표시
+- 생산성 중심 UI
+
+**Mobile UI (터치 최적화)**
+- 단일 스크롤 레이아웃
+- 하단 네비게이션 바
+- 플로팅 채팅 버튼
+- 카드 중심 UI
 
 ## 데이터 아키텍처
 
