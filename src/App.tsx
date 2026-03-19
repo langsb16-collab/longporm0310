@@ -506,20 +506,20 @@ export default function App() {
               >
                 <div className="bg-gradient-to-br from-[#1428A0] to-[#2563EB] rounded-3xl p-12 text-white relative overflow-hidden shadow-xl">
                   <div className="relative z-10 max-w-2xl">
-                    <h2 className="text-4xl font-bold mb-4">AI가 당신의 유튜브 채널을 자동으로 성장시킵니다</h2>
-                    <p className="text-blue-100 text-lg mb-8">대본 · 영상 · 쇼츠 · 업로드까지 한 번에 자동화</p>
+                    <h2 className="text-4xl font-bold mb-4">{t.hero.title}</h2>
+                    <p className="text-blue-100 text-lg mb-8">{t.hero.subtitle}</p>
                     <div className="flex items-center gap-4">
                       <button 
                         onClick={() => setActiveTab('create')}
                         className="bg-[#FF7A00] text-white font-bold px-6 py-3.5 rounded-xl hover:bg-[#FF8C1A] transition-all shadow-lg shadow-orange-500/30 flex items-center gap-2"
                       >
-                        <Sparkles size={20} /> 영상 만들기
+                        <Sparkles size={20} /> {t.hero.createBtn}
                       </button>
                       <button 
                         onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}
                         className="bg-white/15 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/25 transition-all border border-white/30 flex items-center gap-2"
                       >
-                        <Play size={18} /> 데모 보기
+                        <Play size={18} /> {t.hero.demoBtn}
                       </button>
                     </div>
                   </div>
@@ -528,15 +528,15 @@ export default function App() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <StatCard label="Total Videos" value={projects.length.toString()} icon={<Video className="text-[#1428A0]" />} />
-                  <StatCard label="Avg. Views (Est.)" value="12.4K" icon={<TrendingUp className="text-[#10B981]" />} />
-                  <StatCard label="Active Channels" value="1" icon={<LayoutDashboard className="text-[#8B5CF6]" />} />
+                  <StatCard label={t.stats.totalVideos} value={projects.length.toString()} icon={<Video className="text-[#1428A0]" />} />
+                  <StatCard label={t.stats.avgViews} value="12.4K" icon={<TrendingUp className="text-[#10B981]" />} />
+                  <StatCard label={t.stats.activeChannels} value="1" icon={<LayoutDashboard className="text-[#8B5CF6]" />} />
                 </div>
 
                 <div className="bg-[#0F1935]/40 backdrop-blur-xl rounded-2xl border border-blue-500/20 overflow-hidden shadow-xl shadow-blue-500/5">
                   <div className="p-6 border-b border-blue-500/20 flex items-center justify-between">
-                    <h3 className="font-bold text-white">Recent Projects</h3>
-                    <button className="text-sm text-[#60A5FA] font-bold hover:text-[#93C5FD] transition-colors">View All</button>
+                    <h3 className="font-bold text-white">{t.projects.title}</h3>
+                    <button className="text-sm text-[#60A5FA] font-bold hover:text-[#93C5FD] transition-colors">{t.projects.viewAll}</button>
                   </div>
                   <div className="divide-y divide-blue-500/10">
                     {projects.map((project) => (
@@ -547,7 +547,7 @@ export default function App() {
                           ) : (
                             <div className="w-full h-full flex flex-col items-center justify-center text-[#60A5FA] bg-gradient-to-br from-[#1428A0]/20 to-[#2563EB]/20">
                               <Video size={32} strokeWidth={1.5} />
-                              <span className="text-[10px] mt-1 text-gray-400 font-medium">No Thumbnail</span>
+                              <span className="text-[10px] mt-1 text-gray-400 font-medium">{t.projects.noThumbnail}</span>
                             </div>
                           )}
                         </div>
@@ -574,7 +574,7 @@ export default function App() {
                     ))}
                     {projects.length === 0 && (
                       <div className="p-12 text-center text-gray-500">
-                        No projects yet. Start by creating your first video!
+                        {t.projects.noProjects}
                       </div>
                     )}
                   </div>

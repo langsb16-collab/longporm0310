@@ -1,7 +1,23 @@
 export const translations = {
   ko: {
     header: { title: "TubeForge AI", create: "영상 만들기", dashboard: "대시보드", trends: "트렌드", comments: "댓글 분석", lang: "🌐 언어" },
-    hero: { title: "AI가 유튜브 채널을 대신 운영합니다", subtitle: "텍스트만으로 대본부터 영상까지 한 번에 제작" },
+    hero: { 
+      title: "AI가 당신의 유튜브 채널을 자동으로 성장시킵니다", 
+      subtitle: "대본 · 영상 · 쇼츠 · 업로드까지 한 번에 자동화",
+      createBtn: "영상 만들기",
+      demoBtn: "데모 보기"
+    },
+    stats: {
+      totalVideos: "전체 영상",
+      avgViews: "평균 조회수 (예상)",
+      activeChannels: "활성 채널"
+    },
+    projects: {
+      title: "최근 프로젝트",
+      viewAll: "전체 보기",
+      noProjects: "프로젝트가 없습니다. 첫 영상을 만들어보세요!",
+      noThumbnail: "썸네일 없음"
+    },
     create: { title: "새 영상 제작", pTitle: "프로젝트 제목", topic: "주제 / 키워드", duration: "길이 (분)", source: "출처 표시", caption: "자막 생성", generate: "제작 시작" },
     chat: { title: "실시간 협업 채팅", placeholder: "메시지 입력...", call: "통화", translate: "번역" },
     faq: { title: "AI FAQ 안내", items: [
@@ -24,7 +40,23 @@ export const translations = {
   },
   en: {
     header: { title: "TubeForge AI", create: "Create", dashboard: "Dashboard", trends: "Trends", comments: "Comments", lang: "🌐 Language" },
-    hero: { title: "AI Runs Your YouTube Channel", subtitle: "From script to video with just text" },
+    hero: { 
+      title: "AI Automatically Grows Your YouTube Channel", 
+      subtitle: "Script · Video · Shorts · Upload - All Automated",
+      createBtn: "Create Video",
+      demoBtn: "Watch Demo"
+    },
+    stats: {
+      totalVideos: "Total Videos",
+      avgViews: "Avg. Views (Est.)",
+      activeChannels: "Active Channels"
+    },
+    projects: {
+      title: "Recent Projects",
+      viewAll: "View All",
+      noProjects: "No projects yet. Start by creating your first video!",
+      noThumbnail: "No Thumbnail"
+    },
     create: { title: "New Video", pTitle: "Project Title", topic: "Topic / Keywords", duration: "Duration (Min)", source: "Show Source", caption: "Auto Captions", generate: "Generate" },
     chat: { title: "Live Collaboration", placeholder: "Type message...", call: "Call", translate: "Translate" },
     faq: { title: "AI FAQ Guide", items: [
@@ -47,7 +79,23 @@ export const translations = {
   },
   zh: {
     header: { title: "TubeForge AI", create: "制作", dashboard: "仪表板", trends: "趋势", comments: "评论", lang: "🌐 语言" },
-    hero: { title: "AI 替您运营 YouTube 频道", subtitle: "只需输入文本，一键制作视频" },
+    hero: { 
+      title: "AI自动增长您的YouTube频道", 
+      subtitle: "脚本·视频·短视频·上传 - 全部自动化",
+      createBtn: "制作视频",
+      demoBtn: "观看演示"
+    },
+    stats: {
+      totalVideos: "总视频数",
+      avgViews: "平均观看次数（预估）",
+      activeChannels: "活跃频道"
+    },
+    projects: {
+      title: "最近项目",
+      viewAll: "查看全部",
+      noProjects: "暂无项目。开始制作您的第一个视频！",
+      noThumbnail: "无缩略图"
+    },
     create: { title: "制作视频", pTitle: "项目标题", topic: "主题 / 关键词", duration: "长度 (分)", source: "显示来源", caption: "自动字幕", generate: "开始制作" },
     chat: { title: "实时协作", placeholder: "输入消息...", call: "通话", translate: "翻译" },
     faq: { title: "AI 常见问题", items: [
@@ -70,7 +118,23 @@ export const translations = {
   },
   ja: {
     header: { title: "TubeForge AI", create: "作成", dashboard: "ダッシュボード", trends: "トレンド", comments: "コメント", lang: "🌐 言語" },
-    hero: { title: "AIがYouTubeチャンネルを代行運営します", subtitle: "テキストだけで台本から動画まで一気に制作" },
+    hero: { 
+      title: "AIがあなたのYouTubeチャンネルを自動成長させます", 
+      subtitle: "台本・動画・ショート・アップロード - すべて自動化",
+      createBtn: "動画作成",
+      demoBtn: "デモ視聴"
+    },
+    stats: {
+      totalVideos: "総動画数",
+      avgViews: "平均視聴回数（推定）",
+      activeChannels: "アクティブチャンネル"
+    },
+    projects: {
+      title: "最近のプロジェクト",
+      viewAll: "すべて表示",
+      noProjects: "プロジェクトがありません。最初の動画を作成しましょう！",
+      noThumbnail: "サムネイルなし"
+    },
     create: { title: "新規作成", pTitle: "タイトル", topic: "トピック", duration: "長さ (分)", source: "出典表示", caption: "字幕生成", generate: "制作開始" },
     chat: { title: "リアルタイムチャット", placeholder: "入力...", call: "通話", translate: "翻訳" },
     faq: { title: "AI よくある質問", items: [
@@ -93,7 +157,23 @@ export const translations = {
   },
   ru: {
     header: { title: "TubeForge AI", create: "Создать", dashboard: "Панель", trends: "Тренды", comments: "Отзывы", lang: "🌐 Язык" },
-    hero: { title: "AI управляет вашим YouTube-каналом", subtitle: "От текста до видео за один шаг" },
+    hero: { 
+      title: "AI автоматически развивает ваш YouTube-канал", 
+      subtitle: "Сценарий · Видео · Shorts · Загрузка - все автоматизировано",
+      createBtn: "Создать видео",
+      demoBtn: "Смотреть демо"
+    },
+    stats: {
+      totalVideos: "Всего видео",
+      avgViews: "Сред. просмотров (прогноз)",
+      activeChannels: "Активные каналы"
+    },
+    projects: {
+      title: "Недавние проекты",
+      viewAll: "Показать все",
+      noProjects: "Пока нет проектов. Создайте первое видео!",
+      noThumbnail: "Без обложки"
+    },
     create: { title: "Новое видео", pTitle: "Название", topic: "Тема", duration: "Длина (мин)", source: "Источники", caption: "Субтитры", generate: "Создать" },
     chat: { title: "Чат команды", placeholder: "Сообщение...", call: "Звонок", translate: "Перевод" },
     faq: { title: "AI Вопросы", items: [
