@@ -509,10 +509,16 @@ export default function App() {
                     <h2 className="text-4xl font-bold mb-4">AI가 당신의 유튜브 채널을 자동으로 성장시킵니다</h2>
                     <p className="text-blue-100 text-lg mb-8">대본 · 영상 · 쇼츠 · 업로드까지 한 번에 자동화</p>
                     <div className="flex items-center gap-4">
-                      <button className="bg-[#FF7A00] text-white font-bold px-6 py-3.5 rounded-xl hover:bg-[#FF8C1A] transition-all shadow-lg shadow-orange-500/30 flex items-center gap-2">
+                      <button 
+                        onClick={() => setActiveTab('create')}
+                        className="bg-[#FF7A00] text-white font-bold px-6 py-3.5 rounded-xl hover:bg-[#FF8C1A] transition-all shadow-lg shadow-orange-500/30 flex items-center gap-2"
+                      >
                         <Sparkles size={20} /> 영상 만들기
                       </button>
-                      <button className="bg-white/15 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/25 transition-all border border-white/30 flex items-center gap-2">
+                      <button 
+                        onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}
+                        className="bg-white/15 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/25 transition-all border border-white/30 flex items-center gap-2"
+                      >
                         <Play size={18} /> 데모 보기
                       </button>
                     </div>
@@ -539,8 +545,9 @@ export default function App() {
                           {project.thumbnail_url ? (
                             <img src={project.thumbnail_url} alt={project.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center text-gray-500">
-                              <ImageIcon size={24} />
+                            <div className="w-full h-full flex flex-col items-center justify-center text-[#60A5FA] bg-gradient-to-br from-[#1428A0]/20 to-[#2563EB]/20">
+                              <Video size={32} strokeWidth={1.5} />
+                              <span className="text-[10px] mt-1 text-gray-400 font-medium">No Thumbnail</span>
                             </div>
                           )}
                         </div>
