@@ -57,6 +57,7 @@ export default function App() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationStep, setGenerationStep] = useState('');
   const [language, setLanguage] = useState<Language>('en');
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const [userId] = useState(() => `user_${Math.random().toString(36).substr(2, 9)}`);
 
   // Chat State
@@ -459,22 +460,30 @@ export default function App() {
             {activeTab === 'faq' && "FAQ"}
           </h2>
           <div className="flex items-center gap-4">
-            <div className="relative group">
-              <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium text-gray-300 hover:text-white">
+            <div className="relative">
+              <button 
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium text-gray-300 hover:text-white"
+              >
                 <Globe size={18} />
                 {language.toUpperCase()}
               </button>
-              <div className="absolute right-0 top-full mt-1 bg-[#1A2942] border border-blue-500/20 rounded-xl shadow-2xl shadow-blue-500/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2 w-32">
-                {(Object.keys(translations) as Language[]).map((lang) => (
-                  <button 
-                    key={lang}
-                    onClick={() => setLanguage(lang)}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-[#2563EB]/20 hover:text-[#60A5FA] transition-colors ${language === lang ? 'text-[#60A5FA] font-bold' : 'text-gray-400'}`}
-                  >
-                    {lang.toUpperCase()}
-                  </button>
-                ))}
-              </div>
+              {isLangOpen && (
+                <div className="absolute right-0 top-full mt-1 bg-[#1A2942] border border-blue-500/20 rounded-xl shadow-2xl shadow-blue-500/20 z-50 py-2 w-32">
+                  {(Object.keys(translations) as Language[]).map((lang) => (
+                    <button 
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang);
+                        setIsLangOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-[#2563EB]/20 hover:text-[#60A5FA] transition-colors ${language === lang ? 'text-[#60A5FA] font-bold' : 'text-gray-400'}`}
+                    >
+                      {lang.toUpperCase()}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
             <button 
               onClick={() => setActiveTab('create')}
